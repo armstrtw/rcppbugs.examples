@@ -22,6 +22,7 @@ Usage
 Here is a snip from the file linear.model.r as an example of a simple model.
 
 ::
+
 	library(rcppbugs)
 	NR <- 1e2L
 	NC <- 2L
@@ -43,4 +44,3 @@ Here is a snip from the file linear.model.r as an example of a simple model.
 	ans <- run.model(m, iterations=1e5L, burn=1e4L, adapt=1e3L, thin=10L)
 	print(apply(ans[["b"]],2,mean))
 	
-
