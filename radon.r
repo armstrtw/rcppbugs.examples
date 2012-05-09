@@ -23,7 +23,8 @@ y.lik <- mcmc.normal(y,mu=y.hat,tau=tau.y,observed=TRUE)
 m <- create.model(mu.a, tau.a, a, b, tau.y, y.hat, y.lik)
 
 cat("running model...\n")
-runtime <- system.time(ans <- run.model(m, iterations=1e5L, burn=1e4L, adapt=1e3L, thin=10L))
+runtime <- system.time(ans <- run.model(m, iterations=1e5L, burn=1e4L, adapt=2e3L, thin=10L))
+cat("acceptance.ratio:",get.ar(ans),"\n")
 
 cat("basement")
 print(mean(ans[["b"]]))

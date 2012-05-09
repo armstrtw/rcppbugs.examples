@@ -17,6 +17,6 @@ thin <- 2L
 
 cat("running rcppbugs model...\n")
 rcppbugs.time <- system.time(ans <- run.model(m, iterations=iterations, burn=burn, adapt=adapt, thin=thin))
+cat("ar:",get.ar(ans),"\n")
 print(mean(ans[["p"]]))
-##print(rcppbugs.coefs)
 print(rcppbugs.time)

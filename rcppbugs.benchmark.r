@@ -3,7 +3,7 @@ library(rjags,quietly=TRUE,verbose=FALSE)
 library(MCMCpack,quietly=TRUE,verbose=FALSE)
 
 ##NR <- 20
-NR <- 1e2L
+NR <- 1e3L
 NC <- 2L
 
 y <- rnorm(NR,1) + 10

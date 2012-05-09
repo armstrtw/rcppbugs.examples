@@ -39,7 +39,7 @@ print(runtime)
 ##debug(MCMClogit)
 ##mcmclogit.runtime <- system.time(l.mcmc <- MCMClogit(outcome ~ male + business + punish + explain, burnin = 1e5L, mcmc = 1e5L, thin=10L, data = wallet.dat))
 
-mcmclogit.runtime <- system.time(l.mcmc <- MCMClogit(outcome ~ male + business + punish + explain, burnin = burn, mcmc = iterations, thin=thin, data = wallet.dat))
+mcmclogit.runtime <- system.time(l.mcmc <- MCMClogit(outcome ~ male + business + punish + explain, burnin = burn, mcmc = iterations, thin=thin, data = wallet.dat,seed=as.integer(runif(1,0,1000))))
 
 cat("mcmclogit.runtime:\n")
 print(mcmclogit.runtime)

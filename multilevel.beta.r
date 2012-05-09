@@ -40,10 +40,12 @@ tau.y <- mcmc.gamma(runif(1),0.01,0.01)
 y.hat <- deterministic(function(a, b, group, X) { a[group] +  b[group] * X}, a, b, group, X)
 y.lik <- mcmc.normal(y,mu=y.hat,tau=tau.y,observed=TRUE)
 
-m <- create.model(mu.a, tau.a, a, b, tau.y, y.hat, y.lik)
+m <- create.model(mu.a, tau.a, a, mu.b, tau.b, b, tau.y, y.hat, y.lik)
 
 cat("running model...\n")
 runtime <- system.time(ans <- run.model(m, iterations=1e5L, burn=1e5L, adapt=1e3L, thin=10L))
+
+cat("ar: ",attr(ans,"acceptance.ratio"),"\n")
 
 cat("alpha:\n")
 print(data.frame(actual.alpha=alpha,est.alpha=apply(ans[["a"]],2,mean)))

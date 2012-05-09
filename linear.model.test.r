@@ -26,6 +26,7 @@ m <- create.model(b, tau.y, y.hat, y.lik)
 cat("running model...\n")
 runtime <- system.time(ans <- run.model(m, iterations=1e5L, burn=1e4L, adapt=1e3L, thin=10L))
 print(apply(ans[["b"]],2,mean))
+cat("acceptance.ratio:",get.ar(ans),"\n")
 
 print(runtime)
 ##cat("ar:",round(ans,2),"\n")

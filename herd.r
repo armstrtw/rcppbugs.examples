@@ -29,6 +29,8 @@ rcppbugs.time <- system.time(ans <- run.model(m, iterations=iterations, burn=bur
 cat("runtime:\n")
 print(rcppbugs.time)
 
+cat("ar:",get.ar(ans),"\n")
+
 cat("b:\n")
 print(apply(ans[["b"]],2,mean))
 
