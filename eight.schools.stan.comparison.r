@@ -22,17 +22,17 @@ y <- c(28,  8, -3,  7, -1,  1, 18, 12)
 sigma.y <- c(15,10,16,11,9,11,10,18)
 tau.y <- sigma.y^-2
 
-mu <- mcmc.normal(rnorm(1) , mu=0.0, tau=1.0e-6)            # noninformative prior on mu
+mu <- mcmc.normal(rnorm(1) , mu=0, tau=1e-6)            # noninformative prior on mu
 tau <- mcmc.uniform(runif(1), lower=0, upper=1000)        # noninformative prior on tau
-eta <- mcmc.normal(rnorm(J),mu=mu, tau=tau)
-theta <- deterministic(function(X,a,b) { a + X * b; }, eta, mu, tau)
+eta <- mcmc.normal(rnorm(J),mu=0, tau=1)
+theta <- deterministic(function(mu,tau,eta) { mu + tau * eta }, mu, tau, eta)
 y.lik <- mcmc.normal(y, theta, tau.y, observed=TRUE)
 
 m <- create.model(mu,tau,eta,theta,y.lik)
 
 cat("running model...\n")
 ##runtime <- system.time(ans <- run.model(m, iterations=1e5L, burn=1e6L, adapt=2e3L, thin=10L))
-runtime <- system.time(ans <- run.model(m, iterations=1e4L, burn=5e3L, adapt=2e3L, thin=10L))
+runtime <- system.time(ans <- run.model(m, iterations=5e3, burn=5e3L, adapt=2e3L, thin=10L))
 print(runtime)
 cat("acceptance.ratio:",get.ar(ans),"\n")
 
