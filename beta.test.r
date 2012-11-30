@@ -18,5 +18,6 @@ thin <- 2L
 cat("running rcppbugs model...\n")
 rcppbugs.time <- system.time(ans <- run.model(m, iterations=iterations, burn=burn, adapt=adapt, thin=thin))
 cat("ar:",get.ar(ans),"\n")
-print(mean(ans[["p"]]))
+cat("actual p:",mean(y),"\n")
+cat("estimated p:",mean(ans[["p"]]),"\n")
 print(rcppbugs.time)
