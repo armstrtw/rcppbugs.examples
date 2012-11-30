@@ -19,20 +19,20 @@ require(rcppbugs)
 
 J <- 8
 sigma.y <- c(15,10,16,11,9,11,10,18)
+tau.y <- sigma.y^-2
 
 mu.theta <- mcmc.normal(rnorm(1) , mu=0.0, tau=1.0E-6)            # noninformative prior on mu
 sigma.theta <- mcmc.uniform(runif(1), lower=0, upper=1000)        # noninformative prior on sigma
 tau.theta <- deterministic(function(x) { x^-2 },  sigma.theta)
-
 theta <- mcmc.normal(rnorm(J),mu=mu.theta, tau=tau.theta)
-tau.y <- deterministic(function(x) { x^-2 },  sigma.y)
 
 y <- mcmc.normal(c(28,  8, -3,  7, -1,  1, 18, 12), theta, tau.y, observed=TRUE)
 
-m <- create.model(mu.theta,sigma.theta,tau.theta,theta,tau.y,y)
+m <- create.model(mu.theta,sigma.theta,tau.theta,theta,y)
 
 cat("running model...\n")
 runtime <- system.time(ans <- run.model(m, iterations=1e5L, burn=1e6L, adapt=2e3L, thin=10L))
+print(runtime)
 cat("acceptance.ratio:",get.ar(ans),"\n")
 
 cat("theta:\n")
